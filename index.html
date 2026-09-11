@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="fr" class="h-full bg-[#F8F9FA]">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Français - 2e commune : Les classes de mots</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter & Dyslexic support -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Dyslexic&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            bg: '#F8F9FA',
+                            dark: '#001D74',
+                            text: '#1E293B',
+                            red: '#C4332B',
+                            yellow: '#ECA531',
+                            yellowLight: '#FFF8E7',
+                            blueLight: '#E8EEFF'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        dyslexic: ['Open Dyslexic', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for accessibility and visual elegance */
+        .dyslexic-mode {
+            font-family: 'Open Dyslexic', 'Inter', sans-serif !important;
+            letter-spacing: 0.05em;
+            word-spacing: 0.15em;
+            line-height: 1.8 !important;
+        }
+
+        .highlight-word {
+            background-color: #ECA531;
+            color: #001D74;
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-weight: 700;
+            display: inline-block;
+            border: 2px solid #001D74;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .btn-cta {
+            background-color: #C4332B;
+            color: #FFFFFF;
+            transition: all 0.2s ease-in-out;
+        }
+        .btn-cta:hover {
+            background-color: #A32720;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(196, 51, 43, 0.3);
+        }
+
+        /* Focus rings for ADHD/Accessibility navigation */
+        button:focus-visible, a:focus-visible, select:focus-visible, input:focus-visible {
+            outline: 3px solid #ECA531 !important;
+            outline-offset: 2px;
+        }
+
+        .accordion-header {
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+    </style>
+</head>
+<body class="h-full flex flex-col font-sans text-brand-text bg-brand-bg transition-all duration-300">
+
+    <!-- HEADER -->
+    <header class="bg-brand-dark text-white shadow-md border-b-4 border-brand-yellow sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-between gap-4">
+            
+            <!-- Left Logo & Titles -->
+            <div class="flex items-center space-x-4">
+                <div class="bg-white/95 p-1.5 rounded-lg shadow-sm flex items-center justify-center">
+                    <img src="https://www.wbe.be/fileadmin/sites/wbe/uploads/images/Poles_territoriaux/logo-poles-terr-GRAND.png" 
+                         alt="Logo Pôle Territorial WBE" 
+                         class="h-10 sm:h-12 w-auto object-contain"
+                         onerror="this.onerror=null; this.src='https://placehold.co/150x50/001D74/FFF?text=P%C3%B4le+WBE';">
+                </div>
+                <div>
+                    <h1 class="text-lg sm:text-xl font-bold tracking-tight text-white flex items-center gap-2">
+                        <span>Français - 2e commune</span>
+                        <span class="hidden md:inline-block bg-brand-red text-xs px-2 py-0.5 rounded-full uppercase tracking-wider text-white font-semibold">CE1D</span>
+                    </h1>
+                    <p class="text-xs sm:text-sm text-brand-yellow font-medium">
+                        Révisions - Les classes de mots
+                    </p>
+                </div>
+            </div>
+
+            <!-- Right Controls & Gamification Score Header Card -->
+            <div class="flex items-center space-x-3 sm:space-x-4">
+                <!-- Dyslexic Font Toggle Button -->
+                <button id="toggleDyslexiaBtn" onclick="toggleDyslexiaMode()" 
+                        class="bg-white/10 hover:bg-white/20 text-white text-xs px-3 py-2 rounded-lg font-medium flex items-center gap-2 transition border border-white/20"
+                        title="Activer/Désactiver la police adaptée aux dyslexiques">
+                    <i class="fa-solid fa-universal-access text-brand-yellow"></i>
+                    <span class="hidden sm:inline">Mode Dyslexie</span>
+                </button>
+
+                <!-- Score Counter Box -->
+                <div class="bg-white text-brand-dark px-4 py-2 rounded-xl shadow-lg border-2 border-brand-yellow flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-brand-yellowLight flex items-center justify-center text-brand-yellow text-lg">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+                    <div>
+                        <div class="text-[10px] uppercase font-bold text-gray-500 tracking-wider">Score Total</div>
+                        <div id="headerScoreDisplay" class="text-lg sm:text-xl font-extrabold text-brand-dark leading-none">0 pts</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION BAR -->
+        <nav class="bg-[#001452] border-t border-white/10" aria-label="Navigation principale">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex space-x-2 sm:space-x-6 overflow-x-auto py-2 scrollbar-none">
+                    
+                    <button onclick="switchTab('intro')" id="tab-btn-intro"
+                            class="tab-link active-tab flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm font-semibold transition whitespace-nowrap bg-brand-red text-white shadow">
+                        <i class="fa-solid fa-circle-info text-brand-yellow"></i>
+                        <span>1. Introduction</span>
+                    </button>
+
+                    <button onclick="switchTab('study')" id="tab-btn-study"
+                            class="tab-link flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm font-semibold transition whitespace-nowrap text-gray-200 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-book-open text-brand-yellow"></i>
+                        <span>2. J'étudie</span>
+                    </button>
+
+                    <button onclick="switchTab('practice')" id="tab-btn-practice"
+                            class="tab-link flex items-center gap-2.5 px-4 py-2.5 rounded-lg text-sm font-semibold transition whitespace-nowrap text-gray-200 hover:bg-white/10 hover:text-white">
+                        <i class="fa-solid fa-gamepad text-brand-yellow"></i>
+                        <span>3. Je pratique</span>
+                    </button>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+
+        <!-- TAB 1 : INTRODUCTION -->
+        <section id="tab-content-intro" class="tab-page space-y-6">
+            
+            <!-- Standardized Section Header -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-dark font-bold text-xs uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-compass text-brand-yellow"></i> Module de Révision
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-dark">Bienvenue dans ton espace d'entraînement !</h2>
+                    <p class="text-gray-600 mt-1 text-sm sm:text-base">
+                        Maîtrise la grammaire française de manière ludique et prépare avec succès tes évaluations.
+                    </p>
+                </div>
+                <span class="bg-brand-blueLight text-brand-dark font-semibold px-4 py-2 rounded-xl text-xs sm:text-sm border border-brand-dark/10 flex items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-graduation-cap text-brand-red"></i> Niveaux 1er & 2e secondaire
+                </span>
+            </div>
+
+            <!-- Main Intro Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: CE1D Importance -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-red-100 text-brand-red flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-bullseye"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-dark mb-2">Objectif CE1D</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Identifier la classe grammaticale des mots est une compétence clé évaluée lors du <strong>CE1D (Certificat d'Étude du Premier Degré)</strong>. Cet entraînement t'assure d'engranger des points précieux !
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-brand-red">
+                        <i class="fa-solid fa-check-circle mr-1.5"></i> Préparation ciblée
+                    </div>
+                </div>
+
+                <!-- Card 2: Pedagogical Method -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-blue-100 text-brand-dark flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-dark mb-2">Comprendre la Nature</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Chaque mot possède une <strong>carte d'identité fixe</strong> (sa nature ou classe grammaticale). Tu apprendras à distinguer les <strong>mots variables</strong> des <strong>mots invariables</strong> avec méthode.
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-brand-dark">
+                        <i class="fa-solid fa-lightbulb text-brand-yellow mr-1.5"></i> Analyse pas à pas
+                    </div>
+                </div>
+
+                <!-- Card 3: Gamification & Rewards -->
+                <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 hover:shadow-md transition flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-yellow-100 text-brand-yellow flex items-center justify-center text-xl font-bold mb-4">
+                            <i class="fa-solid fa-award"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-brand-dark mb-2">Défis & Récompenses</h3>
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Résous des séries de 10 phrases aléatoires, cumule des points, débloque des bonus de combo et perfectionne ton score au fil de 3 modes de jeux stimulants !
+                        </p>
+                    </div>
+                    <div class="mt-4 pt-4 border-t border-gray-100 flex items-center text-xs font-semibold text-amber-600">
+                        <i class="fa-solid fa-star text-brand-yellow mr-1.5"></i> Progression interactive
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Accessibility / Comfort Box -->
+            <div class="bg-brand-blueLight border-2 border-brand-dark/10 rounded-2xl p-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-3">
+                    <div class="text-2xl text-brand-dark">
+                        <i class="fa-solid fa-universal-access"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-brand-dark text-sm sm:text-base">Confort de lecture & Accessibilité</h4>
+                        <p class="text-xs sm:text-sm text-gray-600">
+                            L'application propose la lecture vocale audio des phrases et une police adaptée pour la dyslexie.
+                        </p>
+                    </div>
+                </div>
+                <button onclick="toggleDyslexiaMode()" class="px-4 py-2 bg-white text-brand-dark text-xs sm:text-sm font-bold rounded-xl shadow-sm border border-brand-dark/20 hover:bg-gray-50 transition shrink-0">
+                    Activer la police DYS
+                </button>
+            </div>
+
+            <!-- Big Start Actions Call to Action -->
+            <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-200 text-center space-y-4">
+                <h3 class="text-xl font-extrabold text-brand-dark">Prêt(e) à commencer tes révisions ?</h3>
+                <p class="text-sm text-gray-600 max-w-2xl mx-auto">
+                    Tu peux réviser la théorie synthétique dans l'onglet <strong>"2. J'étudie"</strong> ou passer directement aux exercices pratiques dans l'onglet <strong>"3. Je pratique"</strong>.
+                </p>
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button onclick="switchTab('study')" class="px-6 py-3 rounded-xl bg-brand-dark text-white font-bold hover:bg-blue-900 transition flex items-center gap-2 text-sm sm:text-base shadow">
+                        <i class="fa-solid fa-book"></i> Lire la fiche synthèse
+                    </button>
+                    <button onclick="switchTab('practice')" class="btn-cta px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm sm:text-base shadow-md">
+                        <i class="fa-solid fa-play"></i> Lancer les exercices
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- TAB 2 : J'ÉTUDIE (Théorie & Synthèse) -->
+        <section id="tab-content-study" class="tab-page space-y-6 hidden">
+            
+            <!-- Standardized Section Header -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-dark font-bold text-xs uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-book-open text-brand-yellow"></i> Cours complet de Français
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-dark">Les classes de mots (Natures)</h2>
+                    <p class="text-gray-600 mt-1 text-sm sm:text-base">
+                        Découvre et révise l'ensemble des catégories grammaticales en français.
+                    </p>
+                </div>
+                <button onclick="switchTab('practice')" class="btn-cta px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow flex items-center gap-2 shrink-0">
+                    <i class="fa-solid fa-dumbbell"></i> Passer aux exercices
+                </button>
+            </div>
+
+            <!-- Introductory Definition Box -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 space-y-3">
+                <p class="text-base font-semibold text-brand-dark leading-relaxed">
+                    Les classes de mots, aussi appelées catégories grammaticales ou natures, constituent la <span class="bg-brand-yellowLight text-brand-dark px-2 py-0.5 rounded font-bold border border-brand-yellow">« carte d'identité »</span> d'un mot.
+                </p>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    La classe d'un mot indique ce qu'il est par nature, indépendamment de son rôle ou de sa position dans une phrase. Cette information ne change pas selon le contexte de la phrase.
+                </p>
+                <div class="p-4 bg-brand-bg rounded-xl border border-gray-200 text-xs sm:text-sm font-medium text-brand-dark flex items-center gap-3">
+                    <i class="fa-solid fa-circle-info text-brand-red text-lg"></i>
+                    <span>Les mots se divisent en deux grands groupes : les <strong>mots variables</strong> et les <strong>mots invariables</strong>.</span>
+                </div>
+            </div>
+
+            <!-- GROUP 1: MOTS VARIABLES -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 space-y-6">
+                <div class="flex items-center gap-3 border-b border-gray-200 pb-3">
+                    <span class="w-8 h-8 rounded-lg bg-brand-dark text-white font-black flex items-center justify-center text-sm">1</span>
+                    <h3 class="text-xl font-extrabold text-brand-dark">Les mots variables</h3>
+                </div>
+                <p class="text-sm text-gray-600 italic">
+                    Leur forme change selon le genre (masculin/féminin), le nombre (singulier/pluriel), la personne, le temps ou le mode.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <!-- A) NOMS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span> A) Les noms
+                            </h4>
+                            <span class="text-[10px] bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded">Variable</span>
+                        </div>
+                        <ul class="text-xs sm:text-sm text-gray-700 space-y-1.5 list-disc list-inside">
+                            <li>Désignent une personne, un animal, un objet, un lieu, une chose...</li>
+                            <li>Sont généralement précédés d’un déterminant</li>
+                            <li>S’accordent en genre et en nombre avec les déterminants</li>
+                            <li>Peuvent être <strong>communs</strong> ou <strong>propres</strong></li>
+                        </ul>
+                    </div>
+
+                    <!-- B) DÉTERMINANTS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span> B) Les déterminants
+                            </h4>
+                            <span class="text-[10px] bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded">Variable</span>
+                        </div>
+                        <ul class="text-xs sm:text-sm text-gray-700 space-y-1 list-disc list-inside">
+                            <li>Introduisent un nom et forment un groupe nominal (GN)</li>
+                            <li>S’accordent en genre et en nombre avec le nom</li>
+                            <li class="font-semibold text-brand-dark mt-1">Catégories :</li>
+                        </ul>
+                        <div class="text-xs text-gray-600 bg-white p-2 rounded-lg border border-gray-200 space-y-1">
+                            <p>• <strong>Articles :</strong> le, la, l’, les, un, une, des, du, de, au, aux</p>
+                            <p>• <strong>Possessifs :</strong> mon, ma, mes, ton, ta, tes, son, sa, ses, notre, nos, votre, vos, leur, leurs</p>
+                            <p>• <strong>Démonstratifs :</strong> ce, cet, cette, ces</p>
+                            <p>• <strong>Numéraux :</strong> deux, cinq, vingt-trois, cent, deux-mille...</p>
+                            <p>• <strong>Indéfinis :</strong> quelques, plusieurs, chaque, tout...</p>
+                            <p>• <strong>Interrogatifs / Exclamatifs :</strong> quel, quelle, quels, quelles...</p>
+                        </div>
+                    </div>
+
+                    <!-- C) ADJECTIFS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span> C) Les adjectifs
+                            </h4>
+                            <span class="text-[10px] bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded">Variable</span>
+                        </div>
+                        <ul class="text-xs sm:text-sm text-gray-700 space-y-1 list-disc list-inside">
+                            <li>Décrivent un nom à propos de caractéristiques (taille, couleur...)</li>
+                            <li>S’accordent en genre et en nombre avec le nom se rapportant</li>
+                        </ul>
+                        <div class="text-xs text-gray-600 bg-white p-2 rounded-lg border border-gray-200 space-y-1">
+                            <p>• <strong>Qualificatifs :</strong> rouge, beau, gentil, grand, effrayant...</p>
+                            <p>• <strong>Numéraux :</strong> premier, dix-septième, centième...</p>
+                            <p>• <strong>Indéfinis :</strong> autre, quelque, tout</p>
+                            <p>• <strong>Possessifs :</strong> mien, tien, sien</p>
+                        </div>
+                    </div>
+
+                    <!-- D) PRONOMS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span> D) Les pronoms
+                            </h4>
+                            <span class="text-[10px] bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded">Variable</span>
+                        </div>
+                        <ul class="text-xs sm:text-sm text-gray-700 space-y-1 list-disc list-inside">
+                            <li>Remplacent un nom ou groupe nominal pour éviter les répétitions</li>
+                            <li>S’accordent en genre et en nombre avec le nom remplacé</li>
+                        </ul>
+                        <div class="text-xs text-gray-600 bg-white p-2 rounded-lg border border-gray-200 space-y-1 max-h-40 overflow-y-auto">
+                            <p>• <strong>Personnels :</strong> je, tu, il, elle, on, nous, vous, ils, elles, eux...</p>
+                            <p>• <strong>Possessifs :</strong> le mien, la tienne, les leurs...</p>
+                            <p>• <strong>Démonstratifs :</strong> celui, celle, ceux, celles...</p>
+                            <p>• <strong>Relatifs :</strong> qui, que, dont, où, auquel, desquels...</p>
+                            <p>• <strong>Indéfinis :</strong> chacun, personne, rien, quelqu’un...</p>
+                            <p>• <strong>Interrogatifs :</strong> qui, que, quoi, lequel... ?</p>
+                        </div>
+                    </div>
+
+                    <!-- E) VERBES -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2 md:col-span-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-red inline-block"></span> E) Les verbes
+                            </h4>
+                            <span class="text-[10px] bg-red-100 text-brand-red font-bold px-2 py-0.5 rounded">Variable</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-700">
+                            Expriment une action ou un état et s’accordent avec le sujet selon le mode, le temps et la personne.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 text-xs text-gray-700 pt-1">
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <strong>Transitif :</strong> verbe + CDV/CIV <br><span class="text-gray-500 italic">Ex: Marie écrit une lettre.</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <strong>Intransitif :</strong> verbe seul <br><span class="text-gray-500 italic">Ex: Je pars.</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <strong>Copule :</strong> être, sembler, paraître, devenir, rester, demeurer...
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <strong>Impersonnel :</strong> verbe + complément <br><span class="text-gray-500 italic">Ex: Il faut du temps.</span>
+                            </div>
+                            <div class="bg-white p-2 rounded border border-gray-200">
+                                <strong>Pronominal :</strong> avec le pronom « se » <br><span class="text-gray-500 italic">Ex: Je me lave.</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- GROUP 2: MOTS INVARIABLES -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 space-y-6">
+                <div class="flex items-center gap-3 border-b border-gray-200 pb-3">
+                    <span class="w-8 h-8 rounded-lg bg-brand-yellow text-brand-dark font-black flex items-center justify-center text-sm">2</span>
+                    <h3 class="text-xl font-extrabold text-brand-dark">Les mots invariables</h3>
+                </div>
+                <p class="text-sm text-gray-600 italic">
+                    Leur orthographe reste toujours la même, peu importe le contexte.
+                </p>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                    
+                    <!-- A) INTERJECTIONS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-yellow inline-block"></span> A) Interjections
+                            </h4>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Invariable</span>
+                        </div>
+                        <p class="text-xs text-gray-700">Expriment une émotion, sensation ou sentiment.</p>
+                        <p class="text-xs bg-white p-2 rounded border border-gray-200 font-medium text-brand-dark">
+                            Exemples : Ouf ! Aïe ! Oh ! Pfff ! Zut ! Rrrrh !
+                        </p>
+                    </div>
+
+                    <!-- B) PRÉPOSITIONS -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-yellow inline-block"></span> B) Prépositions
+                            </h4>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Invariable</span>
+                        </div>
+                        <p class="text-xs text-gray-700">Montrent la position, le lieu, le temps ou la relation.</p>
+                        <p class="text-xs bg-white p-2 rounded border border-gray-200 text-gray-600">
+                            <strong>Simples :</strong> à, dans, pour, par, sous, sur, devant, avec... <br>
+                            <strong>Locutions :</strong> au-dessus de, autour de, à travers, en face de, près de...
+                        </p>
+                    </div>
+
+                    <!-- C) ADVERBES -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-yellow inline-block"></span> C) Adverbes
+                            </h4>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Invariable</span>
+                        </div>
+                        <p class="text-xs text-gray-700">Précisent le sens d'un verbe, adjectif ou autre adverbe.</p>
+                        <p class="text-xs bg-white p-2 rounded border border-gray-200 text-gray-600">
+                            Exemples : lentement, gentiment, toujours, jamais, souvent, hier, demain, très, bien, vite, finalement...
+                        </p>
+                    </div>
+
+                    <!-- D) CONJONCTIONS DE COORDINATION -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-yellow inline-block"></span> D) Conjonctions de coordination
+                            </h4>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Invariable</span>
+                        </div>
+                        <p class="text-xs text-gray-700">Relient deux mots ou propositions de même fonction.</p>
+                        <p class="text-xs bg-white p-2 rounded border border-gray-200 font-bold text-brand-dark">
+                            Mais, où, et, or, ni, car
+                        </p>
+                    </div>
+
+                    <!-- E) CONJONCTIONS DE SUBORDINATION -->
+                    <div class="border border-gray-200 rounded-xl p-4 bg-brand-bg space-y-2 md:col-span-2 lg:col-span-2">
+                        <div class="flex items-center justify-between">
+                            <h4 class="font-extrabold text-brand-dark text-sm sm:text-base flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-brand-yellow inline-block"></span> E) Conjonctions de subordination
+                            </h4>
+                            <span class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2 py-0.5 rounded">Invariable</span>
+                        </div>
+                        <p class="text-xs text-gray-700">Enchâssent une phrase dans une autre pour former une phrase complexe.</p>
+                        <p class="text-xs bg-white p-2 rounded border border-gray-200 text-gray-600">
+                            Exemples : que, parce que, lorsque, tandis que, dès que, si, comme, comment, pourquoi...
+                        </p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CTA Bottom Section -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 text-center space-y-3">
+                <h3 class="text-lg font-bold text-brand-dark">Tu as révisé la théorie ? Passons à la pratique !</h3>
+                <button onclick="switchTab('practice')" class="btn-cta px-8 py-3.5 rounded-xl font-extrabold text-base shadow-md inline-flex items-center gap-3">
+                    <i class="fa-solid fa-gamepad text-brand-yellow text-xl"></i> Commencer les exercices pratiques
+                </button>
+            </div>
+
+        </section>
+
+        <!-- TAB 3 : JE PRATIQUE (Exercices & Gamification) -->
+        <section id="tab-content-practice" class="tab-page space-y-6 hidden">
+            
+            <!-- Standardized Section Header -->
+            <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                <div>
+                    <div class="flex items-center gap-2 text-brand-dark font-bold text-xs uppercase tracking-wider mb-1">
+                        <i class="fa-solid fa-gamepad text-brand-yellow"></i> Entraînement Interactif
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold text-brand-dark">Analyse de phrases</h2>
+                    <p class="text-gray-600 mt-1 text-sm sm:text-base">
+                        Identifie la classe grammaticale exacte du groupe de mots mis en évidence.
+                    </p>
+                </div>
+
+                <!-- Mode selector dropdown -->
+                <div class="flex items-center gap-2 bg-brand-bg p-1.5 rounded-xl border border-gray-200 shrink-0">
+                    <label for="gameModeSelect" class="text-xs font-bold text-brand-dark px-2">Mode :</label>
+                    <select id="gameModeSelect" onchange="changeGameMode(this.value)" 
+                            class="bg-white border border-gray-300 font-bold text-xs sm:text-sm rounded-lg px-3 py-1.5 text-brand-dark focus:ring-2 focus:ring-brand-dark">
+                        <option value="mode1">Jeu 1 : QCM (3 Choix)</option>
+                        <option value="mode2">Jeu 2 : Liste complète (9 natures)</option>
+                        <option value="mode3">Jeu 3 : Défi Écriture</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- GAME CONTAINER CARD -->
+            <div id="gamePlayArea" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm border border-gray-200 space-y-6">
+                
+                <!-- Game Header: Progress & Combo -->
+                <div class="flex items-center justify-between gap-4 border-b border-gray-100 pb-4">
+                    <div class="flex items-center gap-2">
+                        <span id="questionCounterBadge" class="bg-brand-dark text-white font-extrabold text-xs px-3 py-1.5 rounded-lg">
+                            Question 1 / 10
+                        </span>
+                        <span id="streakBadge" class="hidden bg-amber-100 text-amber-800 text-xs font-bold px-2.5 py-1.5 rounded-lg flex items-center gap-1">
+                            <i class="fa-solid fa-fire text-brand-yellow"></i> <span id="streakCount">0</span> Combo !
+                        </span>
+                    </div>
+
+                    <!-- Audio Listen Button -->
+                    <button onclick="speakCurrentSentence()" 
+                            class="bg-brand-blueLight hover:bg-blue-100 text-brand-dark text-xs sm:text-sm font-bold px-3 py-1.5 rounded-lg transition flex items-center gap-2 border border-brand-dark/10"
+                            title="Écouter la phrase à haute voix">
+                        <i class="fa-solid fa-volume-high text-brand-red"></i>
+                        <span class="hidden sm:inline">Écouter</span>
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden border border-gray-200">
+                    <div id="gameProgressBar" class="bg-brand-yellow h-full transition-all duration-300 w-1/10 rounded-full"></div>
+                </div>
+
+                <!-- Sentence Display Box -->
+                <div class="bg-brand-bg rounded-2xl p-6 border-2 border-brand-dark/10 text-center min-h-[120px] flex flex-col justify-center items-center shadow-inner">
+                    <p id="sentenceTextDisplay" class="text-lg sm:text-2xl font-bold text-brand-text leading-relaxed">
+                        Chargement de la phrase...
+                    </p>
+                    <p class="text-xs text-gray-500 mt-3 font-medium flex items-center gap-1">
+                        <i class="fa-solid fa-magnifying-glass text-brand-yellow"></i> Consigne : Donne la nature du mot entre crochets/surligné.
+                    </p>
+                </div>
+
+                <!-- INTERACTIVE INPUT AREA (SWITCHES BASED ON MODE) -->
+                <div id="interactiveInputArea" class="pt-2">
+                    <!-- Dynamic choices rendered by JS -->
+                </div>
+
+                <!-- FEEDBACK & EXPLANATION BOX -->
+                <div id="feedbackBox" class="hidden rounded-xl p-4 text-sm font-medium transition-all duration-200 space-y-2">
+                    <div class="flex items-center gap-2 font-bold text-base" id="feedbackTitle">
+                        <!-- Icon & status -->
+                    </div>
+                    <p id="feedbackMessage" class="text-gray-700"></p>
+                    <div class="pt-2">
+                        <button id="nextQuestionBtn" onclick="nextQuestion()" 
+                                class="btn-cta text-sm font-bold px-6 py-2.5 rounded-xl flex items-center gap-2 shadow">
+                            <span>Question suivante</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- GAME OVER SUMMARY CARD (HIDDEN BY DEFAULT) -->
+            <div id="gameOverArea" class="hidden bg-white rounded-2xl p-8 shadow-sm border border-gray-200 text-center space-y-6">
+                <div class="w-20 h-20 bg-yellow-100 text-brand-yellow text-4xl rounded-full flex items-center justify-center mx-auto shadow-inner border-2 border-brand-yellow">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl sm:text-3xl font-extrabold text-brand-dark">Félicitations ! Série terminée !</h3>
+                    <p class="text-gray-600 mt-1">Tu as complété les 10 phrases d'entraînement.</p>
+                </div>
+
+                <!-- Score Summary Stats Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-xl mx-auto">
+                    <div class="bg-brand-bg p-4 rounded-xl border border-gray-200">
+                        <div class="text-xs font-bold text-gray-500 uppercase">Score de la session</div>
+                        <div id="summarySessionScore" class="text-2xl font-black text-brand-dark">0 pts</div>
+                    </div>
+                    <div class="bg-brand-bg p-4 rounded-xl border border-gray-200">
+                        <div class="text-xs font-bold text-gray-500 uppercase">Bonnes réponses</div>
+                        <div id="summaryCorrectCount" class="text-2xl font-black text-emerald-600">0 / 10</div>
+                    </div>
+                    <div class="bg-brand-bg p-4 rounded-xl border border-gray-200">
+                        <div class="text-xs font-bold text-gray-500 uppercase">Meilleur Combo</div>
+                        <div id="summaryMaxStreak" class="text-2xl font-black text-brand-yellow">0</div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-brand-yellowLight text-brand-dark rounded-xl font-semibold text-sm max-w-lg mx-auto border border-brand-yellow" id="encouragingFinalMsg">
+                    Bravo pour tes efforts ! Continue à réviser pour devenir imbattable au CE1D.
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+                    <button onclick="restartGameSession()" class="btn-cta px-6 py-3 rounded-xl font-bold flex items-center gap-2 text-sm sm:text-base shadow">
+                        <i class="fa-solid fa-rotate-right"></i> Recommencer une série (+10 phrases)
+                    </button>
+                    <button onclick="switchTab('study')" class="px-6 py-3 rounded-xl bg-brand-dark text-white font-bold hover:bg-blue-900 transition flex items-center gap-2 text-sm sm:text-base">
+                        <i class="fa-solid fa-book-open"></i> Revoir la théorie
+                    </button>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-brand-dark text-white border-t border-brand-yellow mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-300">
+            <div class="flex items-center gap-2">
+                <i class="fa-solid fa-copyright text-brand-yellow"></i>
+                <span>Pôle territorial WBE Bruxelles - Tous droits réservés.</span>
+            </div>
+            <div class="font-semibold text-brand-yellow">
+                Application d'apprentissage du Français
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        /* RESOURCE BANK DATA (Cleaned & Parsed directly from prompt specification) */
+        const RAW_RESOURCE_BANK = [
+            { text: "[Tous] les lundis, Laurence court vers la classe où a lieu ce cours d’histoire américaine.", answer: "adjectif" },
+            { text: "Tous les lundis, Laurence [court] vers la classe où a lieu ce cours d’histoire américaine.", answer: "verbe" },
+            { text: "Tous les lundis, Laurence court vers la classe [où] a lieu ce cours d’histoire américaine.", answer: "conjonction de coordination" },
+            { text: "Tous les lundis, Laurence court vers la classe où a lieu [ce] cours d’histoire américaine.", answer: "déterminant" },
+            { text: "Tous les lundis, Laurence court vers la classe où a lieu ce [cours] d’histoire américaine.", answer: "nom" },
+            { text: "Veux-[tu] dépoussiérer la rangée de livres usagés et les ranger dans la bibliothèque de l’entrée principale ?", answer: "pronom" },
+            { text: "Veux-tu dépoussiérer [la] rangée de livres usagés et les ranger dans la bibliothèque de l’entrée principale ?", answer: "déterminant" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et [les] ranger dans la bibliothèque de l’entrée principale ?", answer: "pronom" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et les ranger [dans] la bibliothèque de l’entrée principale ?", answer: "préposition" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et les ranger dans la [bibliothèque] de l’entrée principale ?", answer: "nom" },
+            { text: "Veux-tu [dépoussiérer] la rangée de livres usagés et les ranger dans la bibliothèque de l’entrée principale ?", answer: "verbe" },
+            { text: "Veux-tu dépoussiérer la rangée de livres [usagés] et les ranger dans la bibliothèque de l’entrée principale ?", answer: "adjectif" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et les ranger dans la bibliothèque de l’entrée [principale] ?", answer: "adjectif" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et les ranger dans la bibliothèque de [l’]entrée principale ?", answer: "déterminant" },
+            { text: "Veux-tu dépoussiérer la rangée de livres usagés et les ranger dans la bibliothèque de l’[entrée] principale ?", answer: "nom" },
+            { text: "Cette colle collante ne colle à rien [sauf] à mes doigts.", answer: "préposition" },
+            { text: "Cette [colle] collante ne colle à rien sauf à mes doigts.", answer: "nom" },
+            { text: "Cette colle collante ne [colle] à rien sauf à mes doigts.", answer: "verbe" },
+            { text: "Cette colle [collante] ne colle à rien sauf à mes doigts.", answer: "adjectif" },
+            { text: "Cette colle collante ne colle à rien sauf à [mes] doigts.", answer: "déterminant" },
+            { text: "Cette colle collante ne colle à rien sauf à mes [doigts].", answer: "nom" },
+            { text: "[Quelques] curieux se bousculent devant les grilles du palais fermé au public.", answer: "pronom" },
+            { text: "Quelques [curieux] se bousculent devant les grilles du palais fermé au public.", answer: "nom" },
+            { text: "Quelques curieux [se] bousculent devant les grilles du palais fermé au public.", answer: "pronom" },
+            { text: "Quelques curieux se [bousculent] devant les grilles du palais fermé au public.", answer: "verbe" },
+            { text: "Quelques curieux se bousculent [devant] les grilles du palais fermé au public.", answer: "préposition" },
+            { text: "Quelques curieux se bousculent devant [les] grilles du palais fermé au public.", answer: "déterminant" },
+            { text: "Quelques curieux se bousculent devant les grilles du palais [fermé] au public.", answer: "adjectif" },
+            { text: "Quelques curieux se bousculent devant les grilles du palais fermé au [public].", answer: "nom" },
+            { text: "[Marie] prépare le petit déjeuner pour ses enfants.", answer: "nom" },
+            { text: "Marie prépare le petit déjeuner pour [ses] enfants.", answer: "déterminant" },
+            { text: "Marie [prépare] le petit déjeuner pour ses enfants.", answer: "verbe" },
+            { text: "Marie prépare le petit [déjeuner] pour ses enfants.", answer: "nom" },
+            { text: "Marie prépare le petit déjeuner pour ses [enfants].", answer: "nom" },
+            { text: "Elle mange toujours vite avec [eux].", answer: "pronom" },
+            { text: "Elle mange [toujours] vite avec eux.", answer: "adverbe" },
+            { text: "Elle mange toujours [vite] avec eux.", answer: "adverbe" },
+            { text: "Elle [mange] toujours vite avec eux.", answer: "verbe" },
+            { text: "Elle espère [avoir] un nouvel emploi dans une compagnie très intéressante.", answer: "verbe" },
+            { text: "Elle espère avoir un nouvel emploi dans une compagnie [très] intéressante.", answer: "adverbe" },
+            { text: "Elle espère avoir un nouvel emploi dans une compagnie très [intéressante].", answer: "adjectif" },
+            { text: "Elle espère avoir [un] nouvel emploi dans une compagnie très intéressante.", answer: "déterminant" },
+            { text: "[Néanmoins], l’entrevue se passe bien.", answer: "adverbe" },
+            { text: "Néanmoins, l’entrevue se passe [bien].", answer: "adverbe" },
+            { text: "Néanmoins, l’entrevue [se] passe bien.", answer: "pronom" },
+            { text: "[Oh], tu es vraiment un menteur !", answer: "interjection" },
+            { text: "Laisse-[le] seul pour qu'il puisse s'endormir.", answer: "pronom" },
+            { text: "Laisse-le seul [pour qu']il puisse s'endormir.", answer: "conjonction de subordination" },
+            { text: "[Laisse]-le seul pour qu'il puisse s'endormir.", answer: "verbe" },
+            { text: "Simon se perdrait [s’]il allait chez ses grands-parents seul en autobus.", answer: "conjonction de subordination" },
+            { text: "Simon se perdrait s’il allait chez ses grands-parents seul [en] autobus.", answer: "préposition" },
+            { text: "Simon se perdrait s’il allait [chez] ses grands-parents seul en autobus.", answer: "préposition" },
+            { text: "Simon se perdrait s’il allait chez ses grands-parents seul en [autobus].", answer: "nom" },
+            { text: "Une entreprise québécoise a mis sur le marché de [tout] nouveaux produits cosmétiques.", answer: "adverbe" },
+            { text: "Une entreprise [québécoise] a mis sur le marché de tout nouveaux produits cosmétiques.", answer: "adjectif" },
+            { text: "Vu les moyennes élevées de température, ces fruits ont muri [prématurément].", answer: "adverbe" },
+            { text: "[Vu] les moyennes élevées de température, ces fruits ont muri prématurément.", answer: "préposition" },
+            { text: "Vu les moyennes [élevées] de température, ces fruits ont muri prématurément.", answer: "adjectif" },
+            { text: "Vu les moyennes élevées de température, [ces] fruits ont muri prématurément.", answer: "déterminant" },
+            { text: "Vu [les] moyennes élevées de température, ces fruits ont muri prématurément.", answer: "déterminant" },
+            { text: "Des pièces pour enfants, Lorraine [en] a créé cinq jusqu’à maintenant.", answer: "pronom" },
+            { text: "Des pièces pour enfants, Lorraine [en] a créé cinq jusqu’à [maintenant].", answer: "adverbe" },
+            { text: "Des pièces pour enfants, Lorraine [en] a créé cinq [jusqu’à] maintenant.", answer: "préposition" },
+            { text: "Des pièces pour [enfants], Lorraine [en] a créé cinq jusqu’à maintenant.", answer: "nom" },
+            { text: "Une immense banderole bleu lavande ornait la devanture [de] la boutique.", answer: "préposition" },
+            { text: "Une immense banderole [bleu] lavande ornait la devanture de la boutique.", answer: "adjectif" },
+            { text: "Une immense banderole bleu lavande ornait la [devanture] de la boutique.", answer: "nom" },
+            { text: "Il [y] a quelque trente ans, ce phénomène était à peine observé dans les écoles.", answer: "pronom" },
+            { text: "Il y a quelque [trente] ans, ce phénomène était à peine observé dans les écoles.", answer: "déterminant" },
+            { text: "Il y a quelque trente ans, ce phénomène [était] à peine observé dans les écoles.", answer: "verbe" },
+            { text: "Il y a quelque trente ans, ce phénomène était [à] peine observé dans les écoles.", answer: "pronom" },
+            { text: "Notre télévision est [de] bonne qualité, mais elle ne vaut pas la vôtre !.", answer: "préposition" },
+            { text: "Notre télévision est de bonne qualité, mais elle ne vaut pas [la vôtre] !.", answer: "pronom" },
+            { text: "Notre télévision est de bonne qualité, mais elle ne vaut [pas] la vôtre !.", answer: "adverbe" },
+            { text: "Notre [télévision] est de bonne qualité, mais elle ne vaut pas la vôtre !.", answer: "nom" },
+            { text: "Avez-vous vu des hommes prendre la fuite ? Oui, j’en ai vu [plusieurs].", answer: "pronom" },
+            { text: "Avez-vous vu des hommes prendre la fuite ? Oui, [j’]en ai vu plusieurs.", answer: "pronom" },
+            { text: "Avez-[vous] vu des hommes prendre la fuite ? Oui, j’en ai vu plusieurs.", answer: "pronom" },
+            { text: "Avez-vous vu des [hommes] prendre la fuite ? Oui, j’en ai vu plusieurs.", answer: "nom" },
+            { text: "Avez-vous vu des hommes prendre la [fuite] ? Oui, j’en ai vu plusieurs.", answer: "nom" },
+            { text: "Avez-vous vu des hommes prendre la fuite ? [Oui], j’en ai vu plusieurs.", answer: "adverbe" },
+            { text: "Nous avons été plusieurs fois [au] cinéma.", answer: "déterminant" },
+            { text: "Nous avons été [plusieurs] fois au cinéma.", answer: "déterminant" },
+            { text: "Nous [avons été] plusieurs fois au cinéma.", answer: "verbe" },
+            { text: "Je n’ai vu [personne] dans ce magasin.", answer: "pronom" },
+            { text: "Je [n’]ai vu personne dans ce magasin.", answer: "adverbe" },
+            { text: "Ce n’est pas tout d’avoir [toutes] les richesses du monde.", answer: "adjectif" },
+            { text: "Ce n’est pas tout [d’]avoir toutes les richesses du monde.", answer: "préposition" },
+            { text: "Ce n’est pas tout d’avoir toutes les [richesses] du monde.", answer: "nom" },
+            { text: "Et [toi], qu'est-ce que tu veux ?.", answer: "pronom" },
+            { text: "Et toi, qu'est-[ce] que tu veux ?", answer: "pronom" },
+            { text: "La salle était à demi vide, [malgré] les nombreuses invitations envoyées.", answer: "prépositions" },
+            { text: "La salle était à demi vide, malgré les [nombreuses] invitations envoyées.", answer: "adjectif" },
+            { text: "La salle était à demi vide, malgré les nombreuses invitations [envoyées].", answer: "adjectif" },
+            { text: "[Nous-mêmes] avons dû fermer les yeux durant certaines scènes du film.", answer: "pronom" },
+            { text: "Nous-mêmes avons dû fermer les yeux durant [certaines] scènes du film.", answer: "adjectif" },
+            { text: "Nous-mêmes avons dû fermer les yeux [durant] certaines scènes du film.", answer: "préposition" },
+            { text: "Nous-mêmes avons dû [fermer] les yeux durant certaines scènes du film.", answer: "verbe" },
+            { text: "Les vins [que] nous aurions voulu déguster n’étaient plus offerts.", answer: "pronom" },
+            { text: "Les vins que nous aurions voulu déguster n’étaient [plus] offerts.", answer: "adverbe" },
+            { text: "C’est une fillette [tout] éblouie qui a reçu le jeu dont elle rêvait depuis des mois.", answer: "adverbe" },
+            { text: "C’est une fillette tout éblouie qui a reçu le jeu [dont] elle rêvait depuis des mois.", answer: "pronom" },
+            { text: "C’est une fillette tout éblouie qui a reçu le jeu dont elle rêvait [depuis] des mois.", answer: "préposition" },
+            { text: "C’est une fillette tout éblouie [qui] a reçu le jeu dont elle rêvait depuis des mois.", answer: "pronom" },
+            { text: "[C’]est une fillette tout éblouie qui a reçu le jeu dont elle rêvait depuis des mois.", answer: "pronom" },
+            { text: "C’est une fillette tout éblouie qui a reçu le [jeu] dont elle rêvait depuis des mois.", answer: "nom" },
+            { text: "Elle les a vu capturer, les deux ours [qui] ont attaqué des randonneurs.", answer: "pronom" },
+            { text: "Elle les a vu capturer, les deux ours qui ont attaqué [des] randonneurs.", answer: "prépositions" },
+            { text: "Elle les a vu [capturer], les deux ours qui ont attaqué des randonneurs.", answer: "verbe" },
+            { text: "Nous participerons [certainement] à la soirée d’observation à laquelle vous nous avez invités.", answer: "adverbe" },
+            { text: "Nous participerons certainement à la soirée d’observation à [laquelle] vous nous avez invités.", answer: "pronom" },
+            { text: "Nous participerons certainement à la soirée d’observation à laquelle vous nous [avez invités].", answer: "verbe" },
+            { text: "Nous participerons certainement à la soirée d’[observation] à laquelle vous nous avez invités.", answer: "nom" },
+            { text: "Nous participerons certainement à la soirée [d’]observation à laquelle vous nous avez invités.", answer: "préposition" },
+            { text: "Néanmoins, [l’]entrevue se passe bien.", answer: "déterminant" },
+            { text: "Finalement, Marie obtient l’emploi [qu’]elle voulait !", answer: "pronom" },
+            { text: "[Finalement], Marie obtient l’emploi qu’elle voulait !", answer: "adverbe" },
+            { text: "Je ferai [comme] je peux.", answer: "conjonction de subordination" },
+            { text: "Où se trouve mon manteau [et] mon parapluie ?", answer: "conjonction de coordination" },
+           { text: "[Quand] reviendras-tu dans ce si beau village de vacances ?", answer: "adverbe" },
+            { text: "Quand reviendras-tu dans ce [si] beau village de vacances ?", answer: "adverbe" },
+            { text: "Quand reviendras-tu [dans] ce si beau village de vacances ?", answer: "préposition" },
+            { text: "Je ne retrouve plus mon téléphone. Pourrais-je emprunter [le vôtre] ?", answer: "pronom" },
+            { text: "[Lorsque] Dieu fit revenir le beau temps, les oiseaux se rassemblèrent sous le pin et chantèrent leur joie merveilleuse.", answer: "conjonction de subordination" },
+            { text: "Lorsque Dieu fit revenir le beau temps, les oiseaux se rassemblèrent sous le pin et chantèrent [leur] joie merveilleuse.", answer: "déterminant" },
+            { text: "Il voudrait [que] je l'accompagne.", answer: "conjonction de subordination" },
+            { text: "Il voudrait que je [l']accompagne.", answer: "pronom" },
+            { text: "Chut, nous sommes dans une bibliothèque, alors cessez ce bruit !", answer: "interjection" },
+            { text: "Chut, nous sommes dans une bibliothèque, [alors] cessez ce bruit !", answer: "conjonction de subordination" },
+            { text: "Chut, nous sommes dans une bibliothèque, alors cessez [ce] bruit !", answer: "déterminant" },
+            { text: "Chut, nous sommes dans une [bibliothèque], alors cessez ce bruit !", answer: "nom" },
+            { text: "Je partirai [quand] tu seras prêt.", answer: "conjonction de subordination" },
+            { text: "Je partirai quand tu seras [prêt].", answer: "adjectif" },
+            { text: "Il étudie beaucoup [car] il veut réussir.", answer: "conjonction de coordination" },
+            { text: "[Il] étudie beaucoup car il veut réussir.", answer: "pronom" },
+            { text: "Il étudie beaucoup car il veut [réussir].", answer: "verbe" },
+            { text: "[Ah] ! J'ai oublié mes clés dans la voiture.", answer: "interjection" },
+            { text: "Ah! J'ai oublié [mes] clés dans la voiture.", answer: "déterminant" },
+            { text: "Depuis qu'il a eu un accident, cet homme parle [franc].", answer: "adverbe" },
+            { text: "[Depuis qu']il a eu un accident, cet homme parle franc.", answer: "conjonction de subordination" },
+            { text: "Une fois [terminé], le travail fut rendu.", answer: "adjectif" },
+            { text: "[Après] son spectacle, nous sommes allés lui porter des fleurs.", answer: "préposition" },
+            { text: "[Comme] tu es grande !", answer: "adverbe" },
+            { text: "[Comme] tu peux t'en douter, j'ai dû acheter une nouvelle voiture.", answer: "conjonction de subordination" },
+            { text: "[Voici] la neige et le vent que la météo nous annonçait.", answer: "adverbe" },
+            { text: "N’est-ce pas un prix exagéré pour un bibelot aussi fragile que [celui-ci] ?", answer: "pronom" },
+            { text: "N’est-ce pas un prix exagéré pour un bibelot [aussi] fragile que celui-ci ?", answer: "adverbe" },
+            { text: "N’est-ce pas un [prix] exagéré pour un bibelot aussi fragile que celui-ci ?", answer: "nom" },
+            { text: "[On] a souvent besoin d’un plus petit que soi.", answer: "pronom" },
+            { text: "On a souvent besoin d’un plus [petit] que soi.", answer: "adjectif" },
+            { text: "Les jeunes jouent [aux] blocs dans le local.", answer: "déterminant" },
+            { text: "[Puisque] vous le souhaitez, nous allons commencer l'examen plus tôt.", answer: "conjonction de subordination" },
+            { text: "Que choisis-tu parmi les propositions ?", answer: "pronom" },
+           { text: "[Où] se trouve mon manteau et mon parapluie ?", answer: "conjonction de coordination" }
+        ];
+
+        /* ALL STANDARD WORD CLASSES IN FRENCH DIDACTICS */
+        const ALL_CLASSES = [
+            "nom",
+            "déterminant",
+            "adjectif",
+            "pronom",
+            "verbe",
+            "adverbe",
+            "interjection",
+            "préposition",
+            "conjonction de coordination",
+            "conjonction de subordination"
+        ];
+
+        /* STATE VARIABLES */
+        let totalScore = 0;
+        let currentMode = "mode1"; // mode1 (QCM), mode2 (Dropdown/List), mode3 (Text Input)
+        let sessionQuestions = [];
+        let currentQuestionIdx = 0;
+        let sessionScore = 0;
+        let correctAnswersCount = 0;
+        let currentStreak = 0;
+        let maxStreak = 0;
+        let answeredCurrent = false;
+
+        /* AUDIO SYNTHESIS (Web Audio API Synthesizer) */
+        function playAudioFeedback(isCorrect) {
+            try {
+                const AudioCtx = window.AudioContext || window.webkitAudioContext;
+                if (!AudioCtx) return;
+                const ctx = new AudioCtx();
+                const osc = ctx.createOscillator();
+                const gain = ctx.createGain();
+                osc.connect(gain);
+                gain.connect(ctx.destination);
+
+                if (isCorrect) {
+                    osc.type = 'triangle';
+                    osc.frequency.setValueAtTime(523.25, ctx.currentTime); // C5
+                    osc.frequency.exponentialRampToValueAtTime(659.25, ctx.currentTime + 0.15); // E5
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                } else {
+                    osc.type = 'sawtooth';
+                    osc.frequency.setValueAtTime(220, ctx.currentTime); // A3
+                    osc.frequency.exponentialRampToValueAtTime(146.83, ctx.currentTime + 0.2); // D3
+                    gain.gain.setValueAtTime(0.2, ctx.currentTime);
+                    gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.3);
+                    osc.start();
+                    osc.stop(ctx.currentTime + 0.3);
+                }
+            } catch (e) {
+                // Audio not allowed without interaction fallback
+            }
+        }
+
+        /* TEXT TO SPEECH (SpeechSynthesis API for Accessibility) */
+        function speakCurrentSentence() {
+            if (!('speechSynthesis' in window)) return;
+            const currentItem = sessionQuestions[currentQuestionIdx];
+            if (!currentItem) return;
+            const textToSpeak = currentItem.text.replace(/\[/g, '').replace(/\]/g, '');
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(textToSpeak);
+            utterance.lang = 'fr-FR';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        /* TAB SWITCHING SYSTEM */
+        function switchTab(tabKey) {
+            document.querySelectorAll('.tab-page').forEach(page => page.classList.add('hidden'));
+            document.querySelectorAll('.tab-link').forEach(btn => {
+                btn.classList.remove('bg-brand-red', 'text-white', 'shadow');
+                btn.classList.add('text-gray-200');
+            });
+
+            const activeContent = document.getElementById(`tab-content-${tabKey}`);
+            const activeBtn = document.getElementById(`tab-btn-${tabKey}`);
+
+            if (activeContent) activeContent.classList.remove('hidden');
+            if (activeBtn) {
+                activeBtn.classList.remove('text-gray-200');
+                activeBtn.classList.add('bg-brand-red', 'text-white', 'shadow');
+            }
+
+            if (tabKey === 'practice' && sessionQuestions.length === 0) {
+                startNewGameSession();
+            }
+        }
+
+        /* ACCESSIBILITY: DYSLEXIA MODE TOGGLE */
+        function toggleDyslexiaMode() {
+            document.body.classList.toggle('dyslexic-mode');
+            const btn = document.getElementById('toggleDyslexiaBtn');
+            if (document.body.classList.contains('dyslexic-mode')) {
+                btn.classList.add('bg-brand-yellow', 'text-brand-dark');
+            } else {
+                btn.classList.remove('bg-brand-yellow', 'text-brand-dark');
+            }
+        }
+
+        /* GAME LOGIC ENGINE */
+        function startNewGameSession() {
+            // Shuffle and pick 10 items
+            const shuffled = [...RAW_RESOURCE_BANK].sort(() => Math.random() - 0.5);
+            sessionQuestions = shuffled.slice(0, 10);
+            currentQuestionIdx = 0;
+            sessionScore = 0;
+            correctAnswersCount = 0;
+            currentStreak = 0;
+            maxStreak = 0;
+
+            document.getElementById('gameOverArea').classList.add('hidden');
+            document.getElementById('gamePlayArea').classList.remove('hidden');
+
+            renderCurrentQuestion();
+        }
+
+        function changeGameMode(newMode) {
+            currentMode = newMode;
+            if (sessionQuestions.length > 0) {
+                renderCurrentQuestion();
+            }
+        }
+
+        function renderCurrentQuestion() {
+            answeredCurrent = false;
+            const item = sessionQuestions[currentQuestionIdx];
+            if (!item) return;
+
+            // Update Progress Bar & Counter
+            const progressPct = ((currentQuestionIdx + 1) / 10) * 100;
+            document.getElementById('gameProgressBar').style.width = `${progressPct}%`;
+            document.getElementById('questionCounterBadge').innerText = `Question ${currentQuestionIdx + 1} / 10`;
+
+            // Update Streak Badge
+            const streakBadge = document.getElementById('streakBadge');
+            if (currentStreak >= 2) {
+                streakBadge.classList.remove('hidden');
+                document.getElementById('streakCount').innerText = currentStreak;
+            } else {
+                streakBadge.classList.add('hidden');
+            }
+
+            // Format Sentence Text with Highlight
+            const rawText = item.text;
+            const formattedText = rawText.replace(/\[(.*?)\]/g, '<span class="highlight-word">$1</span>');
+            document.getElementById('sentenceTextDisplay').innerHTML = formattedText;
+
+            // Reset Feedback Box
+            const feedbackBox = document.getElementById('feedbackBox');
+            feedbackBox.classList.add('hidden');
+            feedbackBox.className = "hidden rounded-xl p-4 text-sm font-medium transition-all duration-200 space-y-2";
+
+            // Render Input Controls based on currentMode
+            const inputArea = document.getElementById('interactiveInputArea');
+            inputArea.innerHTML = '';
+
+            const normalizedCorrect = normalizeAnswer(item.answer);
+
+            if (currentMode === 'mode1') {
+                // MODE 1: 3 Multiple Choice Options
+                let options = [normalizedCorrect];
+                const availableWrong = ALL_CLASSES.filter(c => c !== normalizedCorrect);
+                const shuffledWrong = availableWrong.sort(() => Math.random() - 0.5).slice(0, 2);
+                options = options.concat(shuffledWrong).sort(() => Math.random() - 0.5);
+
+                const grid = document.createElement('div');
+                grid.className = 'grid grid-cols-1 sm:grid-cols-3 gap-3';
+
+                options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.className = 'p-4 rounded-xl font-bold border-2 border-gray-200 hover:border-brand-dark bg-white hover:bg-brand-blueLight text-brand-dark transition text-center shadow-sm text-sm sm:text-base capitalize';
+                    btn.innerText = opt;
+                    btn.onclick = () => checkAnswer(opt);
+                    grid.appendChild(btn);
+                });
+                inputArea.appendChild(grid);
+
+            } else if (currentMode === 'mode2') {
+                // MODE 2: Dropdown Select from all classes
+                const container = document.createElement('div');
+                container.className = 'max-w-md mx-auto space-y-3 text-center';
+
+                const select = document.createElement('select');
+                select.id = 'classSelectDropdown';
+                select.className = 'w-full p-3.5 border-2 border-gray-300 font-bold text-brand-dark rounded-xl bg-white shadow-sm focus:border-brand-dark capitalize text-sm sm:text-base';
+                
+                const defaultOpt = document.createElement('option');
+                defaultOpt.value = '';
+                defaultOpt.innerText = '-- Choisis la classe grammaticale --';
+                select.appendChild(defaultOpt);
+
+                ALL_CLASSES.forEach(c => {
+                    const opt = document.createElement('option');
+                    opt.value = c;
+                    opt.innerText = c;
+                    select.appendChild(opt);
+                });
+
+                const submitBtn = document.createElement('button');
+                submitBtn.className = 'btn-cta w-full py-3 rounded-xl font-bold text-sm sm:text-base shadow';
+                submitBtn.innerText = 'Valider ma réponse';
+                submitBtn.onclick = () => {
+                    if (!select.value) return;
+                    checkAnswer(select.value);
+                };
+
+                container.appendChild(select);
+                container.appendChild(submitBtn);
+                inputArea.appendChild(container);
+
+            } else if (currentMode === 'mode3') {
+                // MODE 3: Text Input with quick assistance tags
+                const container = document.createElement('div');
+                container.className = 'max-w-md mx-auto space-y-3';
+
+                const input = document.createElement('input');
+                input.type = 'text';
+                input.id = 'classTextInput';
+                input.placeholder = 'Ex: nom, verbe, adjectif...';
+                input.className = 'w-full p-3.5 border-2 border-gray-300 font-bold text-brand-dark rounded-xl bg-white shadow-sm focus:border-brand-dark text-sm sm:text-base';
+                input.onkeyup = (e) => {
+                    if (e.key === 'Enter') checkAnswer(input.value);
+                };
+
+                const helperContainer = document.createElement('div');
+                helperContainer.className = 'flex flex-wrap gap-1.5 justify-center pt-1';
+                ALL_CLASSES.forEach(c => {
+                    const chip = document.createElement('button');
+                    chip.className = 'text-[11px] bg-gray-100 hover:bg-brand-blueLight text-gray-700 font-semibold px-2 py-1 rounded-md border border-gray-200 transition';
+                    chip.innerText = c;
+                    chip.onclick = () => {
+                        input.value = c;
+                        input.focus();
+                    };
+                    helperContainer.appendChild(chip);
+                });
+
+                const submitBtn = document.createElement('button');
+                submitBtn.className = 'btn-cta w-full py-3 rounded-xl font-bold text-sm sm:text-base shadow';
+                submitBtn.innerText = 'Valider ma réponse';
+                submitBtn.onclick = () => checkAnswer(input.value);
+
+                container.appendChild(input);
+                container.appendChild(helperContainer);
+                container.appendChild(submitBtn);
+                inputArea.appendChild(container);
+            }
+        }
+
+        function normalizeAnswer(str) {
+            if (!str) return '';
+            let val = str.toLowerCase().trim();
+            if (val === 'prépositions') return 'préposition';
+            return val;
+        }
+
+        function checkAnswer(userGivenAnswer) {
+            if (answeredCurrent) return;
+            answeredCurrent = true;
+
+            const currentItem = sessionQuestions[currentQuestionIdx];
+            const expected = normalizeAnswer(currentItem.answer);
+            const userNorm = normalizeAnswer(userGivenAnswer);
+
+            const isCorrect = (userNorm === expected);
+
+            const feedbackBox = document.getElementById('feedbackBox');
+            const feedbackTitle = document.getElementById('feedbackTitle');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+
+            // Disable further inputs in inputArea
+            const inputArea = document.getElementById('interactiveInputArea');
+            const buttons = inputArea.querySelectorAll('button, select, input');
+            buttons.forEach(b => b.disabled = true);
+
+            playAudioFeedback(isCorrect);
+
+            if (isCorrect) {
+                correctAnswersCount++;
+                currentStreak++;
+                if (currentStreak > maxStreak) maxStreak = currentStreak;
+
+                // Points formula: 100 pts + streak bonus
+                const ptsGained = 100 + (currentStreak - 1) * 20;
+                sessionScore += ptsGained;
+                totalScore += ptsGained;
+                document.getElementById('headerScoreDisplay').innerText = `${totalScore} pts`;
+
+                feedbackBox.className = "rounded-xl p-4 bg-emerald-50 border-2 border-emerald-400 text-emerald-900 transition-all duration-200 space-y-2";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-600 text-xl"></i> <span>Excellente réponse ! (+${ptsGained} pts)</span>`;
+                feedbackMessage.innerHTML = `Bravo ! La classe grammaticale de ce mot est bien <strong>${expected}</strong>.`;
+
+            } else {
+                currentStreak = 0;
+                feedbackBox.className = "rounded-xl p-4 bg-red-50 border-2 border-red-300 text-red-900 transition-all duration-200 space-y-2";
+                feedbackTitle.innerHTML = `<i class="fa-solid fa-circle-xmark text-brand-red text-xl"></i> <span>Aïe, pas tout à fait !</span>`;
+                feedbackMessage.innerHTML = `La bonne réponse était : <strong class="uppercase underline">${expected}</strong>.<br><span class="text-xs text-gray-600">Consulte la fiche "2. J'étudie" si tu as un doute sur cette règle.</span>`;
+            }
+
+            feedbackBox.classList.remove('hidden');
+        }
+
+        function nextQuestion() {
+            currentQuestionIdx++;
+            if (currentQuestionIdx < 10) {
+                renderCurrentQuestion();
+            } else {
+                finishGameSession();
+            }
+        }
+
+        function finishGameSession() {
+            document.getElementById('gamePlayArea').classList.add('hidden');
+            const gameOverArea = document.getElementById('gameOverArea');
+            gameOverArea.classList.remove('hidden');
+
+            document.getElementById('summarySessionScore').innerText = `${sessionScore} pts`;
+            document.getElementById('summaryCorrectCount').innerText = `${correctAnswersCount} / 10`;
+            document.getElementById('summaryMaxStreak').innerText = `${maxStreak}`;
+
+            const encouragingMsg = document.getElementById('encouragingFinalMsg');
+            if (correctAnswersCount >= 8) {
+                encouragingMsg.innerText = "🏆 Félicitations ! Champion de la grammaire ! Tu es prêt(e) pour le CE1D.";
+            } else if (correctAnswersCount >= 5) {
+                encouragingMsg.innerText = "👍 Bon travail ! Tu as de bonnes bases, relis bien la fiche synthèse pour atteindre le sans-faute !";
+            } else {
+                encouragingMsg.innerText = "💪 N'abandonne pas ! Relis calmement la fiche '2. J'étudie' puis relance une série pour progresser.";
+            }
+        }
+
+        function restartGameSession() {
+            startNewGameSession();
+        }
+
+        /* INITIALIZATION ON WINDOW LOAD */
+        window.onload = function() {
+            // Start on Tab 1
+            switchTab('intro');
+        };
+    </script>
+</body>
+</html>
